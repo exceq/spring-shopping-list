@@ -50,4 +50,16 @@ public class Purchase implements Serializable {
     public void setBought(Boolean bought) {
         isBought = bought;
     }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
+    }
 }

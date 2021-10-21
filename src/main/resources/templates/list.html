@@ -10,21 +10,27 @@
 </head>
 <body>
 <div class="container">
-    <h1 style="color: green">Список покупок</h1>
+    <h1 style="color: green; display: inline-block;">Список покупок</h1>
+    <button onclick="location.href='/items/new'" class="btn-success" style="float: right; margin: 15px">Добавить покупку</button>
     <hr/>
     <div class="content">
-        <div class="row article" th:each="purchase : ${list}">
-            <div class="col-md-10 col-md-offset-1">
-                <h3 th:text="${'Дата добавления ' + purchase.creationDate.toLocaleString()}">Дата добавления 2019.09.08</h3>
-            </div>
+        <div class="row article" th:each="purchase : ${purchases}">
             <div class="col-md-11 description">
-                <p class="description-text" th:text="${purchase.text}">Text</p>
+                <h3 class="description-text" th:text="${purchase.text}">Текст</h3>
             </div>
-<!--            <div class="col-md-1">-->
-<!--                <button class="btn btn-sm btn-secondary like"-->
-<!--                        th:text="${purchase.likes + ' ❤'}"-->
-<!--                        th:attr="data-purchase-id=${purchase.id}">0 ❤</button>-->
-<!--            </div>-->
+            <div class="col-md-10 col-md-offset-1">
+                <h5 th:text="${purchase.description}">Описание</h5>
+            </div>
+            <div class="col-md-10 col-md-offset-1">
+                <p th:text="${'Дата добавления ' + purchase.creationDate.toLocaleString()}">Дата добавления 2019.09.08</p>
+            </div>
+            <form th:action="${'/items/'+purchase.id}" th:method="get">
+                <button th:type="submit" class="btn-info" style="margin: 5px">Открыть</button>
+            </form>
+            <form th:action="${'/items/'+purchase.id}" th:method="delete">
+                <button th:type="submit" class="btn-danger" style="margin: 5px">Удалить</button>
+            </form>
+<!--            <a th:href="/items/${purchase.id}" th:type="delete" class="btn-danger">Удалить</a>-->
             <div class="col-md-12">
                 <hr/>
             </div>

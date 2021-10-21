@@ -8,20 +8,23 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 <div class="container">
-    <h1 style="color: green">Добавить новую покупку</h1>
+    <h1 style="color: green">Просмотр покупки</h1>
     <hr/>
     <div class="content">
         <div class="row">
             <div class="col-md-12">
-                <form action="/items" method="post">
+                <form th:action="${'/items/'+item.id}" th:method="put">
                     <div class="form-group">
-                        <textarea name="text" class="form-control" cols="30" rows="2" placeholder="Текст"></textarea>
+                        <textarea name="text" class="form-control" cols="30" rows="2" placeholder="Текст"
+                                  th:text="${item.text}"></textarea>
                     </div>
                     <div class="form-group">
-                        <textarea name="description" class="form-control" cols="30" rows="7" placeholder="Описание"></textarea>
+                        <textarea name="description" class="form-control" cols="30" rows="7" placeholder="Описание"
+                                  th:text="${item.description}"></textarea>
                     </div>
                     <div class="form-group">
-                        <input type="submit" class="btn btn-primary" value="Добавить">
+                        <input type="submit" class="btn-success" value="Изменить" style="">
+                        <button onclick="location.href='/items'" type="button" class="btn-light">Назад к списку</button>
                     </div>
                 </form>
             </div>

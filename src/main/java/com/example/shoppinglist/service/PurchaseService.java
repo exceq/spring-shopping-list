@@ -4,31 +4,37 @@ import com.example.shoppinglist.model.Purchase;
 import com.example.shoppinglist.repository.PurchaseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 
 import java.util.*;
 
 @Service
 public class PurchaseService {
-// TODO
 
-    final PurchaseRepository postRepository;
+    final PurchaseRepository purchaseRepository;
 
     @Autowired
-    public PurchaseService(PurchaseRepository postRepository) {
-        this.postRepository = postRepository;
+    public PurchaseService(PurchaseRepository purchaseRepository) {
+        this.purchaseRepository = purchaseRepository;
     }
 
     public Iterable<Purchase> listAllPurchases() {
-        return postRepository.findAll();
+        return purchaseRepository.findAll();
     }
 
     public Optional<Purchase> getPurchase(long id){
-        return postRepository.findById(id);
+        return purchaseRepository.findById(id);
+    }
+
+    public void delete(Long id){
+        purchaseRepository.deleteById(id);
+    }
+
+    public void update(Purchase purchase){
+        purchaseRepository.save(purchase);
     }
 
     public void create(String text, String description) {
         Purchase purchase = new Purchase(null, text, description, new Date());
-        postRepository.save(purchase);
+        purchaseRepository.save(purchase);
     }
 }

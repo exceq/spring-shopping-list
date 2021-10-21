@@ -4,6 +4,7 @@ import com.example.shoppinglist.service.PurchaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,28 +19,15 @@ public class PurchaseCreateController {
         this.purchaseService = purchaseService;
     }
 
-    @RequestMapping(path = "/new", method = RequestMethod.GET)
+    @RequestMapping(path = "/items/new", method = RequestMethod.GET)
     public String create(Model model) {
         return "create";
     }
 
-    @RequestMapping(path = "/new", method = RequestMethod.POST)
-    private void doCreate(Model model) {
-        String text = (String) model.getAttribute("text");
-        String description = (String) model.getAttribute("description");
-
+    @RequestMapping(path = "/items", method = RequestMethod.POST)
+    private String doCreate(@ModelAttribute("text") String text,
+                            @ModelAttribute("description") String description) {
         purchaseService.create(text,description);
-    }
-
-    @RequestMapping(path = "/new", method = RequestMethod.GET)
-    public String create1(Model model) {
-        model.addAttribute("appName", "Моё супер приложение!");
-        return "create";
-    }
-
-    @RequestMapping(path = "/new", method = RequestMethod.POST)
-    public String doCreate(@ModelAttribute("text") String text) {
-        postService.create(text);
-        return "redirect:/abc";
+        return "redirect:/items";
     }
 }
