@@ -18,10 +18,28 @@ public class PurchaseCreateController {
         this.purchaseService = purchaseService;
     }
 
-    @RequestMapping(path = "/items", method = RequestMethod.POST)
+    @RequestMapping(path = "/new", method = RequestMethod.GET)
     public String create(Model model) {
-        purchaseService.create(); //TODO
+        return "create";
+    }
+
+    @RequestMapping(path = "/new", method = RequestMethod.POST)
+    private void doCreate(Model model) {
+        String text = (String) model.getAttribute("text");
+        String description = (String) model.getAttribute("description");
+
+        purchaseService.create(text,description);
+    }
+
+    @RequestMapping(path = "/new", method = RequestMethod.GET)
+    public String create1(Model model) {
         model.addAttribute("appName", "Моё супер приложение!");
         return "create";
+    }
+
+    @RequestMapping(path = "/new", method = RequestMethod.POST)
+    public String doCreate(@ModelAttribute("text") String text) {
+        postService.create(text);
+        return "redirect:/abc";
     }
 }

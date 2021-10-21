@@ -4,6 +4,7 @@ import com.example.shoppinglist.model.Purchase;
 import com.example.shoppinglist.repository.PurchaseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import java.util.*;
 
@@ -26,8 +27,8 @@ public class PurchaseService {
         return postRepository.findById(id);
     }
 
-    public void create(String text) {
-        Purchase purchase = new Purchase(null, text, new Date());
+    public void create(String text, String description) {
+        Purchase purchase = new Purchase(null, text, description, new Date());
         postRepository.save(purchase);
     }
 }
