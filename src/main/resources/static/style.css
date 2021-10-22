@@ -1,0 +1,25 @@
+.checkbox {
+    display: block;
+    position: relative;
+    top: 12px;
+    right: 20px;
+}
+
+.buttons form {
+    margin: 5px;
+    display: inline-block;
+}
+
+.title {
+    color: green;
+    display: inline-block;
+}
+
+.add {
+    float: right;
+    margin: 15px;
+}
+
+.row-bought {
+    color: lightgray;
+}
